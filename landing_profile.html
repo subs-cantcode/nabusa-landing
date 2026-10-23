@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NABUS — Developer & AI Product Studio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
+                    },
+                    colors: {
+                        studio: {
+                            accent: '#f5a623',
+                            accentHover: '#d98e11',
+                            accentGlow: 'rgba(245, 166, 35, 0.12)',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'slide-up': 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(12px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables for explicit high-contrast light/dark mode */
+        :root {
+            --bg-page: #f8f9fa;
+            --bg-surface: #ffffff;
+            --bg-surface-subtle: #f1f3f5;
+            --border-main: #e2e8f0;
+            --border-hover: #cbd5e1;
+            
+            --text-main: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --badge-bg: #f1f5f9;
+        }
+
+        html.dark {
+            --bg-page: #0a0a0c;
+            --bg-surface: #121215;
+            --bg-surface-subtle: #1a1a1e;
+            --border-main: #27272a;
+            --border-hover: #3f3f46;
+            
+            --text-main: #f3f4f6;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --badge-bg: #18181b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+        
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .blur-backdrop {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Dynamic CSS Theme Variable Classes */
+        .theme-surface {
+            background-color: var(--bg-surface);
+            border-color: var(--border-main);
+        }
+        .theme-surface-subtle {
+            background-color: var(--bg-surface-subtle);
+            border-color: var(--border-main);
+        }
+        .theme-text-main {
+            color: var(--text-main);
+        }
+        .theme-text-secondary {
+            color: var(--text-secondary);
+        }
+        .theme-text-muted {
+            color: var(--text-muted);
+        }
+        .theme-border {
+            border-color: var(--border-main);
+        }
+
+        /* Springy hover dynamics & motion curves */
+        .card-spring {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25), 
+                        border-color 0.25s ease, 
+                        box-shadow 0.3s ease;
+        }
+        @media (hover: hover) {
+            .card-spring:hover {
+                transform: translateY(-2px) scale(1.005);
+                border-color: #f5a623 !important;
+            }
+        }
+
+        .btn-motion {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-motion:active {
+            transform: scale(0.96);
+        }
+
+        /* Link hover animated underline */
+        .hover-underline {
+            position: relative;
+            text-decoration: none;
+        }
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f5a623;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .hover-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Subtle grid background pattern */
+        .bg-grid-pattern {
+            background-size: 28px 28px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        html:not(.dark) .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        }
+
+        /* Smooth Accordion Motion */
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .accordion-content.open {
+            grid-template-rows: 1fr;
+        }
+        .accordion-inner {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-studio-accent selection:text-black bg-grid-pattern">
+
+    <!-- MAIN CONTAINER -->
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-14 w-full flex-grow space-y-10 sm:space-y-12 animate-fade-in">
+        
+        <!-- HEADER -->
+        <header class="flex items-center justify-between border-b pb-4 sm:pb-5 theme-border">
+            <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-8 h-8 rounded-full bg-studio-accent/20 border border-studio-accent/40 flex items-center justify-center text-studio-accent font-bold text-xs mono group-hover:scale-105 transition-transform">
+                    N
+                </div>
+                <div class="flex flex-col">
+                    <span class="mono text-xs font-semibold tracking-wider theme-text-main group-hover:text-studio-accent transition-colors">Nabus</span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()" class="mono text-[11px] sm:text-xs theme-text-secondary hover:text-studio-accent transition px-3 py-1.5 rounded border theme-border hover:border-studio-accent btn-motion theme-surface">
+                    <span id="themeLabel">LIGHT</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- PERSONAL PROFILE & BIO SECTION -->
+        <section class="space-y-4 sm:space-y-5 animate-slide-up">
+            <div class="space-y-1">
+                <span class="mono text-xs text-studio-accent tracking-widest uppercase font-medium">ABOUT</span>
+                <h1 class="text-2xl sm:text-3xl font-light theme-text-main leading-tight tracking-tight">
+                    Nabus
+                </h1>
+            </div>
+
+            <div class="text-sm leading-relaxed space-y-3 font-normal theme-text-secondary">
+                <p class="text-base sm:text-lg theme-text-main font-normal leading-snug">
+                    Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
+                </p>
+            </div>
+        </section>
+
+        <!-- ACTIVE ECOSYSTEM / PROJECTS -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b pb-2 theme-border">
+                <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">Active Ecosystem</h2>
+                <span class="mono text-[10px] theme-text-muted">02 PROJECTS</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-4 rounded-xl theme-surface border card-spring space-y-2 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="mono text-xs text-studio-accent font-medium">SYSTEM 01</span>
+                        <span class="mono text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-medium">LIVE</span>
+                    </div>
+                    <h3 class="text-sm font-semibold theme-text-main">Notion OS Workspaces</h3>
+                    <p class="text-xs theme-text-secondary leading-relaxed">All-in-one productivity OS for academics, application tracking, and AI prompt engineering.</p>
+                </div>
+
+                <div class="p-4 rounded-xl theme-surface-subtle border card-spring space-y-2 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="mono text-xs theme-text-muted font-medium">SYSTEM 02</span>
+                        <span class="mono text-[10px] px-2 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 theme-text-muted border theme-border font-medium">IN DEV</span>
+                    </div>
+                    <h3 class="text-sm font-semibold theme-text-main">DataForge AI SaaS</h3>
+                    <p class="text-xs theme-text-secondary leading-relaxed">Describe the transformation you want—your dataset becomes one.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- STOREFRONT / PRODUCTS -->
+        <section class="space-y-4 sm:space-y-5">
+            <div class="flex items-center justify-between border-b pb-2 theme-border">
+                <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">Digital Products</h2>
+                <div class="mono text-xs space-x-2">
+                    <button onclick="setCurrency('INR')" id="btnINR" class="text-studio-accent font-semibold btn-motion">₹ INR</button>
+                    <span class="theme-text-muted">/</span>
+                    <button onclick="setCurrency('USD')" id="btnUSD" class="theme-text-muted hover:text-studio-accent btn-motion">$ USD</button>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FEATURED PRODUCT: AI Student & Career OS -->
+                <div class="group p-5 sm:p-6 rounded-2xl theme-surface border card-spring space-y-5 relative overflow-hidden shadow-md">
+                    
+                    <!-- Ambient Glow -->
+                    <div class="absolute -top-12 -right-12 w-36 h-36 bg-studio-accent/10 rounded-full blur-2xl group-hover:bg-studio-accent/20 transition-all duration-500"></div>
+
+                    <div class="flex items-start justify-between relative z-10">
+                        <div class="space-y-1.5">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="mono text-xs theme-text-muted">01</span>
+                                <h3 class="text-base font-semibold theme-text-main group-hover:text-studio-accent transition-colors">AI Student & Career OS</h3>
+                                <!-- Badge -->
+                                <span class="mono text-[10px] px-2.5 py-0.5 rounded-full bg-studio-accent/10 text-studio-accent border border-studio-accent/30 font-medium">Recommended</span>
+                            </div>
+                            <p class="text-xs theme-text-secondary max-w-md pt-1 leading-relaxed">
+                                The ultimate Notion workspace. Features an Academic Course Tracker, Job Application Pipeline, and pre-engineered AI Prompt Vault for university and career prep.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Modules Pill Preview -->
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2 pt-1 relative z-10">
+                        <span class="mono text-[10px] sm:text-[11px] px-2.5 py-1 rounded theme-surface-subtle border theme-border theme-text-secondary font-medium">🎓 Academics Tracker</span>
+                        <span class="mono text-[10px] sm:text-[11px] px-2.5 py-1 rounded theme-surface-subtle border theme-border theme-text-secondary font-medium">💼 Job Pipeline</span>
+                        <span class="mono text-[10px] sm:text-[11px] px-2.5 py-1 rounded theme-surface-subtle border theme-border theme-text-secondary font-medium">🤖 AI Prompts</span>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-4 border-t theme-border relative z-10">
+                        <div class="flex items-baseline space-x-2">
+                            <span id="priceDisplay" class="text-xl font-bold theme-text-main">₹500</span>
+                            <span id="origPriceDisplay" class="text-xs theme-text-muted line-through">₹999</span>
+                            <span class="mono text-[10px] theme-text-muted">• Lifetime Access</span>
+                        </div>
+
+                        <a href="https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa" target="_blank" class="w-full sm:w-auto text-center mono text-xs px-5 py-3 rounded-lg bg-studio-accent hover:bg-studio-accentHover text-black font-semibold btn-motion shadow-md inline-block">
+                            GET INSTANT ACCESS →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRODUCT FEEDBACK & TESTIMONIALS DRAWER -->
+        <section class="border-t pt-5 theme-border space-y-3">
+            <div class="flex items-center justify-between cursor-pointer group py-2" onclick="toggleAccordion('feedbackContent', 'feedbackIcon')">
+                <div class="space-y-0.5">
+                    <div class="flex items-center space-x-2">
+                        <h2 class="mono text-xs theme-text-muted uppercase tracking-widest group-hover:text-studio-accent transition-colors font-medium">Product Feedback & Testimonials</h2>
+                        <span class="mono text-[10px] px-1.5 py-0.5 rounded theme-surface-subtle theme-text-secondary border theme-border font-medium">FREE</span>
+                    </div>
+                    <p class="text-xs theme-text-muted">Bought a template or product? Share reviews, feature requests, or report bugs.</p>
+                </div>
+                <span id="feedbackIcon" class="mono theme-text-muted group-hover:text-studio-accent transition-transform duration-300 text-sm font-bold">[ + ]</span>
+            </div>
+
+            <div id="feedbackContent" class="accordion-content">
+                <div class="accordion-inner pt-2 space-y-3">
+                    
+                    <!-- Submission Notification Banner -->
+                    <div id="feedbackStatusBanner" class="hidden p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 mono text-xs flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span>✓</span>
+                            <span>Feedback has been submitted! Opening your mail client...</span>
+                        </div>
+                        <button onclick="dismissFeedbackStatus()" class="hover:opacity-80 font-bold">[ X ]</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <input type="text" id="fbName" placeholder="Your Name or Handle" class="p-3 rounded-lg theme-surface border theme-border text-xs theme-text-main focus:outline-none focus:border-studio-accent mono">
+                        <input type="email" id="fbEmail" placeholder="Your Email" class="p-3 rounded-lg theme-surface border theme-border text-xs theme-text-main focus:outline-none focus:border-studio-accent mono">
+                    </div>
+                    <textarea id="feedbackText" rows="3" placeholder="Share your experience with AI Student & Career OS or request features for future updates..." class="w-full p-3 rounded-lg theme-surface border theme-border text-xs theme-text-main focus:outline-none focus:border-studio-accent mono"></textarea>
+                    
+                    <button onclick="submitFeedback()" class="mono text-xs px-5 py-3 rounded-lg bg-neutral-900 dark:bg-neutral-800 hover:bg-studio-accent hover:text-black dark:hover:bg-studio-accent dark:hover:text-black text-white transition font-medium btn-motion w-full sm:w-auto">
+                        SUBMIT TRANSMISSION →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t theme-border py-8 px-4 sm:px-6 mt-10">
+        <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 mono text-xs theme-text-muted text-center sm:text-left">
+            <div class="flex items-center space-x-2 font-semibold theme-text-main tracking-wider">
+                <span>CHECK ME OUT</span>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
+                <a href="https://discord.com/users/1438788042017214547" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium text-studio-accent">Discord [@subsnotcool]</a>
+                <span class="theme-text-muted hidden sm:inline">/</span>
+                <a href="https://www.threads.com/@bottlesonbottles1942" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Threads</a>
+                <span class="theme-text-muted hidden sm:inline">/</span>
+                <a href="https://github.com/subs-cantcode" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Github</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        let currentCurrency = 'INR';
+        const TOPMATE_PRODUCT_URL = "https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa";
+
+        function setCurrency(type) {
+            currentCurrency = type;
+            const btnINR = document.getElementById('btnINR');
+            const btnUSD = document.getElementById('btnUSD');
+
+            if (type === 'INR') {
+                btnINR.className = 'text-studio-accent font-semibold btn-motion';
+                btnUSD.className = 'theme-text-muted hover:text-studio-accent btn-motion';
+                document.getElementById('priceDisplay').innerText = '₹500';
+                document.getElementById('origPriceDisplay').innerText = '₹999';
+            } else {
+                btnUSD.className = 'text-studio-accent font-semibold btn-motion';
+                btnINR.className = 'theme-text-muted hover:text-studio-accent btn-motion';
+                document.getElementById('priceDisplay').innerText = '$9';
+                document.getElementById('origPriceDisplay').innerText = '$19';
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const label = document.getElementById('themeLabel');
+
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                label.innerText = 'DARK';
+            } else {
+                html.classList.add('dark');
+                label.innerText = 'LIGHT';
+            }
+        }
+
+        function toggleAccordion(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.innerText = '[ + ]';
+            } else {
+                content.classList.add('open');
+                icon.innerText = '[ − ]';
+            }
+        }
+
+        function submitFeedback() {
+            const name = document.getElementById('fbName').value.trim() || 'Anonymous User';
+            const email = document.getElementById('fbEmail').value.trim() || 'No email provided';
+            const text = document.getElementById('feedbackText').value.trim();
+
+            if (!text) {
+                alert('Please type your feedback message before submitting.');
+                return;
+            }
+
+            // Show notification status banner
+            const statusBanner = document.getElementById('feedbackStatusBanner');
+            statusBanner.classList.remove('hidden');
+
+            // Construct mailto link to dataforge.support@gmail.com
+            const subject = encodeURIComponent(`[DataForge Product Feedback] from ${name}`);
+            const body = encodeURIComponent(`Name/Handle: ${name}\nEmail: ${email}\n\nFeedback / Testimonial:\n${text}`);
+            const mailtoUrl = `mailto:dataforge.support@gmail.com?subject=${subject}&body=${body}`;
+
+            // Trigger email client
+            setTimeout(() => {
+                window.location.href = mailtoUrl;
+            }, 400);
+
+            // Reset inputs
+            document.getElementById('feedbackText').value = '';
+            document.getElementById('fbName').value = '';
+            document.getElementById('fbEmail').value = '';
+        }
+
+        function dismissFeedbackStatus() {
+            document.getElementById('feedbackStatusBanner').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
