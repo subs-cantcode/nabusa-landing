@@ -178,36 +178,53 @@
         .accordion-inner {
             overflow: hidden;
         }
+
+        /* Apply JetBrains Mono to the bio description */
+        .typing-bio {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Blinking cursor effect */
+        .typed-cursor {
+            display: inline-block;
+            width: 8px;
+            background-color: currentColor;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Custom Audio Progress Bar Styling */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background: #f5a623;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            background: #f5a623;
+            cursor: pointer;
+            border: none;
+        }
     </style>
-<!-- JetBrains Mono Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-  <style>
-    /* Apply JetBrains Mono to the bio description */
-    .typing-bio {
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Blinking cursor effect */
-    .typed-cursor {
-      display: inline-block;
-      width: 8px;
-      background-color: currentColor;
-      animation: blink 1s infinite;
-      margin-left: 2px;
-      vertical-align: middle;
-    }
-
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
-  </style>
-</head>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-studio-accent selection:text-black bg-grid-pattern">
+
+    <!-- Hidden YouTube Player API iFrame -->
+    <div class="hidden">
+        <div id="yt-audio-player"></div>
+    </div>
 
     <!-- MAIN CONTAINER -->
     <div class="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-14 w-full flex-grow space-y-10 sm:space-y-12 animate-fade-in">
@@ -231,40 +248,49 @@
             </div>
         </header>
 
-        <!-- PERSONAL PROFILE & BIO SECTION -->
         <!-- ABOUT ME SECTION -->
-<section class="mb-12">
-  <h2 class="text-xs uppercase tracking-widest text-zinc-500 mb-4">ABOUT ME</h2>
-  <p id="bio-text" class="typing-bio text-zinc-300 text-sm leading-relaxed">
-    Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
-  </p>
-</section>
+        <section class="mb-12">
+            <h2 class="text-xs uppercase tracking-widest text-zinc-500 mb-4">ABOUT ME</h2>
+            <p id="bio-text" class="typing-bio text-zinc-300 text-sm leading-relaxed">
+                Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
+            </p>
+        </section>
 
-<!-- MY FAVORITE MUSIC SECTION -->
-<section class="mb-12">
-  <div class="flex justify-between items-center mb-4">
-    <h2 class="text-xs uppercase tracking-widest text-zinc-500">MY FAVORITE MUSIC</h2>
-    <span class="text-[10px] text-zinc-600 uppercase tracking-wider">01 TRACK</span>
-  </div>
+        <!-- MY FAVORITE MUSIC SECTION WITH CUSTOM IN-PAGE PLAYER -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xs uppercase tracking-widest text-zinc-500">MY FAVORITE MUSIC</h2>
+                <span class="text-[10px] text-zinc-600 uppercase tracking-wider">01 TRACK</span>
+            </div>
 
-  <a href="https://music.youtube.com/watch?v=_eXEO7bzo4w&list=OLAK5uy_n7cfQSo1SvchmWq3uT6X9J7EBUSOnypfs" 
-     target="_blank" 
-     rel="noopener noreferrer"
-     class="block p-4 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:border-zinc-700 transition group">
-    <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-white transition">
-          🎵
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-zinc-200 group-hover:text-white transition">Feel It</h3>
-          <p class="text-xs text-zinc-500">21 Savage & Metro Boomin</p>
-        </div>
-      </div>
-      <span class="text-xs text-zinc-500 group-hover:text-zinc-300 transition">Listen ↗</span>
-    </div>
-  </a>
-</section>
+            <div class="p-4 sm:p-5 rounded-2xl theme-surface border theme-border card-spring space-y-4 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-studio-accent/10 border border-studio-accent/30 flex items-center justify-center text-studio-accent text-lg">
+                            🎵
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-semibold theme-text-main">Feel It</h3>
+                            <p class="text-xs theme-text-secondary">21 Savage & Metro Boomin</p>
+                        </div>
+                    </div>
+
+                    <!-- Custom Play/Pause Button -->
+                    <button id="musicPlayBtn" onclick="togglePlayMusic()" class="w-10 h-10 rounded-full bg-studio-accent hover:bg-studio-accentHover text-black font-bold flex items-center justify-center transition btn-motion shadow-md">
+                        <span id="playIcon">▶</span>
+                    </button>
+                </div>
+
+                <!-- Custom Scrubber / Progress Bar -->
+                <div class="space-y-1.5 pt-1">
+                    <input type="range" id="musicSeeker" min="0" value="0" step="1" oninput="seekMusic(this.value)" class="w-full h-1 bg-zinc-700 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer">
+                    <div class="flex justify-between text-[10px] mono theme-text-muted">
+                        <span id="musicCurrentTime">0:00</span>
+                        <span id="musicTotalTime">2:59</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ACTIVE ECOSYSTEM / PROJECTS -->
         <section class="space-y-4">
@@ -406,8 +432,77 @@
         </div>
     </footer>
 
+    <!-- YOUTUBE IFRAME API FOR AUDIO -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
     <!-- SCRIPT LOGIC -->
     <script>
+        let player;
+        let isPlaying = false;
+        let updateInterval;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-audio-player', {
+                height: '0',
+                width: '0',
+                videoId: '_eXEO7bzo4w',
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            const seeker = document.getElementById('musicSeeker');
+            const duration = player.getDuration();
+            seeker.max = duration;
+            document.getElementById('musicTotalTime').innerText = formatTime(duration);
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                document.getElementById('playIcon').innerText = '❚❚';
+                updateInterval = setInterval(updateMusicProgress, 500);
+            } else {
+                isPlaying = false;
+                document.getElementById('playIcon').innerText = '▶';
+                clearInterval(updateInterval);
+            }
+        }
+
+        function togglePlayMusic() {
+            if (!player) return;
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+        }
+
+        function seekMusic(seconds) {
+            if (!player) return;
+            player.seekTo(seconds, true);
+        }
+
+        function updateMusicProgress() {
+            if (!player) return;
+            const currentTime = player.getCurrentTime();
+            document.getElementById('musicSeeker').value = currentTime;
+            document.getElementById('musicCurrentTime').innerText = formatTime(currentTime);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
         let currentCurrency = 'INR';
         const TOPMATE_PRODUCT_URL = "https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa";
 
@@ -465,21 +560,17 @@
                 return;
             }
 
-            // Show notification status banner
             const statusBanner = document.getElementById('feedbackStatusBanner');
             statusBanner.classList.remove('hidden');
 
-            // Construct mailto link to dataforge.support@gmail.com
             const subject = encodeURIComponent(`[DataForge Product Feedback] from ${name}`);
             const body = encodeURIComponent(`Name/Handle: ${name}\nEmail: ${email}\n\nFeedback / Testimonial:\n${text}`);
             const mailtoUrl = `mailto:dataforge.support@gmail.com?subject=${subject}&body=${body}`;
 
-            // Trigger email client
             setTimeout(() => {
                 window.location.href = mailtoUrl;
             }, 400);
 
-            // Reset inputs
             document.getElementById('feedbackText').value = '';
             document.getElementById('fbName').value = '';
             document.getElementById('fbEmail').value = '';
@@ -488,28 +579,27 @@
         function dismissFeedbackStatus() {
             document.getElementById('feedbackStatusBanner').classList.add('hidden');
         }
+
         document.addEventListener("DOMContentLoaded", function () {
-      const bioElement = document.getElementById("bio-text");
-      const fullText = "Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.";
-      
-      // Clear initial text and prepare structure with cursor
-      bioElement.innerHTML = '<span class="text"></span><span class="typed-cursor">&nbsp;</span>';
-      const textSpan = bioElement.querySelector(".text");
-      
-      let i = 0;
-      const speed = 40; // Medium typing speed (ms per letter)
+            const bioElement = document.getElementById("bio-text");
+            const fullText = "Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.";
+            
+            bioElement.innerHTML = '<span class="text"></span><span class="typed-cursor">&nbsp;</span>';
+            const textSpan = bioElement.querySelector(".text");
+            
+            let i = 0;
+            const speed = 40;
 
-      function typeWriter() {
-        if (i < fullText.length) {
-          textSpan.textContent += fullText.charAt(i);
-          i++;
-          setTimeout(typeWriter, speed);
-        }
-      }
+            function typeWriter() {
+                if (i < fullText.length) {
+                    textSpan.textContent += fullText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
 
-      // Start typing animation after a brief 300ms pause
-      setTimeout(typeWriter, 300);
-    });
+            setTimeout(typeWriter, 300);
+        });
     </script>
 </body>
 </html>
