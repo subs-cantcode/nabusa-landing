@@ -179,6 +179,33 @@
             overflow: hidden;
         }
     </style>
+<!-- JetBrains Mono Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Apply JetBrains Mono to the bio description */
+    .typing-bio {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Blinking cursor effect */
+    .typed-cursor {
+      display: inline-block;
+      width: 8px;
+      background-color: currentColor;
+      animation: blink 1s infinite;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-studio-accent selection:text-black bg-grid-pattern">
 
@@ -205,20 +232,39 @@
         </header>
 
         <!-- PERSONAL PROFILE & BIO SECTION -->
-        <section class="space-y-4 sm:space-y-5 animate-slide-up">
-            <div class="space-y-1">
-                <span class="mono text-xs text-studio-accent tracking-widest uppercase font-medium">ABOUT</span>
-                <h1 class="text-2xl sm:text-3xl font-light theme-text-main leading-tight tracking-tight">
-                    Nabus
-                </h1>
-            </div>
+        <!-- ABOUT ME SECTION -->
+<section class="mb-12">
+  <h2 class="text-xs uppercase tracking-widest text-zinc-500 mb-4">ABOUT ME</h2>
+  <p id="bio-text" class="typing-bio text-zinc-300 text-sm leading-relaxed">
+    Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
+  </p>
+</section>
 
-            <div class="text-sm leading-relaxed space-y-3 font-normal theme-text-secondary">
-                <p class="text-base sm:text-lg theme-text-main font-normal leading-snug">
-                    Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
-                </p>
-            </div>
-        </section>
+<!-- MY FAVORITE MUSIC SECTION -->
+<section class="mb-12">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xs uppercase tracking-widest text-zinc-500">MY FAVORITE MUSIC</h2>
+    <span class="text-[10px] text-zinc-600 uppercase tracking-wider">01 TRACK</span>
+  </div>
+
+  <a href="https://music.youtube.com/watch?v=_eXEO7bzo4w&list=OLAK5uy_n7cfQSo1SvchmWq3uT6X9J7EBUSOnypfs" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="block p-4 rounded-xl border border-zinc-800 bg-zinc-900/50 hover:border-zinc-700 transition group">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-white transition">
+          🎵
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-zinc-200 group-hover:text-white transition">Feel It</h3>
+          <p class="text-xs text-zinc-500">21 Savage & Metro Boomin</p>
+        </div>
+      </div>
+      <span class="text-xs text-zinc-500 group-hover:text-zinc-300 transition">Listen ↗</span>
+    </div>
+  </a>
+</section>
 
         <!-- ACTIVE ECOSYSTEM / PROJECTS -->
         <section class="space-y-4">
@@ -442,6 +488,28 @@
         function dismissFeedbackStatus() {
             document.getElementById('feedbackStatusBanner').classList.add('hidden');
         }
+        document.addEventListener("DOMContentLoaded", function () {
+      const bioElement = document.getElementById("bio-text");
+      const fullText = "Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.";
+      
+      // Clear initial text and prepare structure with cursor
+      bioElement.innerHTML = '<span class="text"></span><span class="typed-cursor">&nbsp;</span>';
+      const textSpan = bioElement.querySelector(".text");
+      
+      let i = 0;
+      const speed = 40; // Medium typing speed (ms per letter)
+
+      function typeWriter() {
+        if (i < fullText.length) {
+          textSpan.textContent += fullText.charAt(i);
+          i++;
+          setTimeout(typeWriter, speed);
+        }
+      }
+
+      // Start typing animation after a brief 300ms pause
+      setTimeout(typeWriter, 300);
+    });
     </script>
 </body>
 </html>
