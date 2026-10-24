@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NABUS — Developer & AI Product Studio</title>
+    <title>NABUS — AI Tools & Notion Systems</title>
+    <meta name="description" content="Nabus builds minimal AI tools, Notion systems, and digital products for students and data people. Building in public.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NABUS — AI Tools & Notion Systems">
+    <meta property="og:description" content="Minimal AI tools, Notion systems, and digital products. Building in public.">
+    <meta property="og:url" content="https://nabusaa.is-pro.dev/">
+    <meta name="twitter:card" content="summary">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -44,10 +50,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
+
     <!-- Flaticon UIcons CDN for Play/Pause Icons -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-    
+
     <style>
         /* CSS Variables for explicit high-contrast light/dark mode */
         :root {
@@ -56,7 +62,7 @@
             --bg-surface-subtle: #f1f3f5;
             --border-main: #e2e8f0;
             --border-hover: #cbd5e1;
-            
+
             --text-main: #0f172a;
             --text-secondary: #334155;
             --text-muted: #64748b;
@@ -69,7 +75,7 @@
             --bg-surface-subtle: #1a1a1e;
             --border-main: #27272a;
             --border-hover: #3f3f46;
-            
+
             --text-main: #f3f4f6;
             --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
@@ -82,11 +88,11 @@
             color: var(--text-main);
             transition: background-color 0.25s ease, color 0.25s ease;
         }
-        
+
         .mono {
             font-family: 'JetBrains Mono', monospace;
         }
-        
+
         .blur-backdrop {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -116,8 +122,8 @@
 
         /* Springy hover dynamics & motion curves */
         .card-spring {
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25), 
-                        border-color 0.25s ease, 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25),
+                        border-color 0.25s ease,
                         box-shadow 0.3s ease;
         }
         @media (hover: hover) {
@@ -159,12 +165,12 @@
         /* Subtle grid background pattern */
         .bg-grid-pattern {
             background-size: 28px 28px;
-            background-image: 
+            background-image:
                 linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
         html:not(.dark) .bg-grid-pattern {
-            background-image: 
+            background-image:
                 linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
         }
@@ -231,9 +237,9 @@
 
     <!-- MAIN CONTAINER -->
     <div class="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-14 w-full flex-grow space-y-10 sm:space-y-12 animate-fade-in">
-        
+
         <!-- HEADER -->
-        <header class="flex items-center justify-between border-b pb-4 sm:pb-5 theme-border">
+        <header class="flex items-center justify-between">
             <div class="flex items-center space-x-3 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                 <div class="w-8 h-8 rounded-full bg-studio-accent/20 border border-studio-accent/40 flex items-center justify-center text-studio-accent font-bold text-xs mono group-hover:scale-105 transition-transform">
                     N
@@ -252,18 +258,18 @@
         </header>
 
         <!-- ABOUT ME SECTION -->
-        <section class="mb-12">
-            <div class="flex items-center justify-between border-b pb-2 theme-border mb-4">
+        <section>
+            <div class="flex items-center justify-between mb-4">
                 <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">ABOUT ME</h2>
             </div>
             <p id="bio-text" class="typing-bio theme-text-secondary text-sm leading-relaxed">
-                Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
+                I build minimal AI tools, Notion systems, and digital products for students and data people. Building in public.
             </p>
         </section>
 
         <!-- MY FAVORITE MUSIC SECTION WITH CUSTOM IN-PAGE PLAYER -->
-        <section class="mb-12">
-            <div class="flex items-center justify-between border-b pb-2 theme-border mb-4">
+        <section>
+            <div class="flex items-center justify-between mb-4">
                 <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">MY FAVORITE MUSIC</h2>
                 <span class="mono text-[10px] theme-text-muted">01 TRACK</span>
             </div>
@@ -276,7 +282,7 @@
                     </div>
 
                     <!-- Custom Play/Pause Button using Flaticon -->
-                    <button id="musicPlayBtn" onclick="togglePlayMusic()" class="w-10 h-10 rounded-full bg-studio-accent hover:bg-studio-accentHover text-black font-bold flex items-center justify-center transition btn-motion shadow-md">
+                    <button id="musicPlayBtn" onclick="togglePlayMusic()" aria-label="Play or pause music" class="w-10 h-10 rounded-full bg-studio-accent hover:bg-studio-accentHover text-black font-bold flex items-center justify-center transition btn-motion shadow-md">
                         <span id="playIcon" class="flex items-center justify-center text-xs">
                             <i class="fi fi-sr-play"></i>
                         </span>
@@ -285,7 +291,7 @@
 
                 <!-- Custom Scrubber / Progress Bar -->
                 <div class="space-y-1.5 pt-1">
-                    <input type="range" id="musicSeeker" min="0" value="0" step="1" oninput="seekMusic(this.value)" class="w-full h-1 bg-zinc-700 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer">
+                    <input type="range" id="musicSeeker" min="0" value="0" step="1" oninput="seekMusic(this.value)" aria-label="Seek" class="w-full h-1 bg-zinc-700 dark:bg-zinc-800 rounded-lg appearance-none cursor-pointer">
                     <div class="flex justify-between text-[10px] mono theme-text-muted">
                         <span id="musicCurrentTime">0:00</span>
                         <span id="musicTotalTime">2:59</span>
@@ -296,7 +302,7 @@
 
         <!-- ACTIVE ECOSYSTEM / PROJECTS -->
         <section class="space-y-4">
-            <div class="flex items-center justify-between border-b pb-2 theme-border">
+            <div class="flex items-center justify-between">
                 <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">Active Ecosystem</h2>
                 <span class="mono text-[10px] theme-text-muted">02 PROJECTS</span>
             </div>
@@ -318,13 +324,15 @@
                     </div>
                     <h3 class="text-sm font-semibold theme-text-main">DataForge AI SaaS</h3>
                     <p class="text-xs theme-text-secondary leading-relaxed">Describe the transformation you want—your dataset becomes one.</p>
+                    <!-- Waitlist: mailto for now; swap for a form service (Formspree, Tally, etc.) when ready -->
+                    <a href="mailto:dataforge.support@gmail.com?subject=DataForge%20AI%20waitlist&body=Add%20me%20to%20the%20DataForge%20AI%20waitlist.%0A%0AName%3A%20%0AWhat%20I'd%20use%20it%20for%3A%20" class="hover-underline inline-block mono text-[11px] text-studio-accent font-medium pt-1">JOIN THE WAITLIST →</a>
                 </div>
             </div>
         </section>
 
         <!-- STOREFRONT / PRODUCTS -->
-        <section class="space-y-4 sm:space-y-5">
-            <div class="flex items-center justify-between border-b pb-2 theme-border">
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
                 <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">Digital Products</h2>
                 <div class="mono text-xs space-x-2">
                     <button onclick="setCurrency('INR')" id="btnINR" class="text-studio-accent font-semibold btn-motion">₹ INR</button>
@@ -334,10 +342,10 @@
             </div>
 
             <div class="space-y-4">
-                
+
                 <!-- FEATURED PRODUCT: AI Student & Career OS -->
                 <div class="group p-5 sm:p-6 rounded-2xl theme-surface border card-spring space-y-5 relative overflow-hidden shadow-md">
-                    
+
                     <!-- Ambient Glow -->
                     <div class="absolute -top-12 -right-12 w-36 h-36 bg-studio-accent/10 rounded-full blur-2xl group-hover:bg-studio-accent/20 transition-all duration-500"></div>
 
@@ -346,8 +354,7 @@
                             <div class="flex flex-wrap items-center gap-2">
                                 <span class="mono text-xs theme-text-muted">01</span>
                                 <h3 class="text-base font-semibold theme-text-main group-hover:text-studio-accent transition-colors">AI Student & Career OS</h3>
-                                <!-- Badge Updated -->
-                                <span class="mono text-[10px] px-2.5 py-0.5 rounded-full bg-studio-accent/10 text-studio-accent border border-studio-accent/30 font-medium">(try out for first timers!)</span>
+                                <span class="mono text-[10px] px-2.5 py-0.5 rounded-full bg-studio-accent/10 text-studio-accent border border-studio-accent/30 font-medium">Launch price</span>
                             </div>
                             <p class="text-xs theme-text-secondary max-w-md pt-1 leading-relaxed">
                                 The ultimate Notion workspace. Features an Academic Course Tracker, Job Application Pipeline, and pre-engineered AI Prompt Vault for university and career prep.
@@ -362,14 +369,14 @@
                         <span class="mono text-[10px] sm:text-[11px] px-2.5 py-1 rounded theme-surface-subtle border theme-border theme-text-secondary font-medium">🤖 AI Prompts</span>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-4 border-t theme-border relative z-10">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-1 relative z-10">
                         <div class="flex items-baseline space-x-2">
                             <span id="priceDisplay" class="text-xl font-bold theme-text-main">₹500</span>
                             <span id="origPriceDisplay" class="text-xs theme-text-muted line-through">₹750</span>
                             <span class="mono text-[10px] theme-text-muted">• Lifetime Access</span>
                         </div>
 
-                        <a href="https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa" target="_blank" class="w-full sm:w-auto text-center mono text-xs px-5 py-3 rounded-lg bg-studio-accent hover:bg-studio-accentHover text-black font-semibold btn-motion shadow-md inline-block">
+                        <a href="https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa" target="_blank" rel="noopener" class="w-full sm:w-auto text-center mono text-xs px-5 py-3 rounded-lg bg-studio-accent hover:bg-studio-accentHover text-black font-semibold btn-motion shadow-md inline-block">
                             GET INSTANT ACCESS →
                         </a>
                     </div>
@@ -379,13 +386,10 @@
         </section>
 
         <!-- PRODUCT FEEDBACK & TESTIMONIALS DRAWER -->
-        <section class="border-t pt-5 theme-border space-y-3">
+        <section class="space-y-3">
             <div class="flex items-center justify-between cursor-pointer group py-2" onclick="toggleAccordion('feedbackContent', 'feedbackIcon')">
                 <div class="space-y-0.5">
-                    <div class="flex items-center space-x-2">
-                        <h2 class="mono text-xs theme-text-muted uppercase tracking-widest group-hover:text-studio-accent transition-colors font-medium">Product Feedback & Testimonials</h2>
-                        <span class="mono text-[10px] px-1.5 py-0.5 rounded theme-surface-subtle theme-text-secondary border theme-border font-medium">FREE</span>
-                    </div>
+                    <h2 class="mono text-xs theme-text-muted uppercase tracking-widest group-hover:text-studio-accent transition-colors font-medium">Product Feedback & Testimonials</h2>
                     <p class="text-xs theme-text-muted">Bought a template or product? Share reviews, feature requests, or report bugs.</p>
                 </div>
                 <span id="feedbackIcon" class="mono theme-text-muted group-hover:text-studio-accent transition-transform duration-300 text-sm font-bold">[ + ]</span>
@@ -393,12 +397,12 @@
 
             <div id="feedbackContent" class="accordion-content">
                 <div class="accordion-inner pt-2 space-y-3">
-                    
+
                     <!-- Submission Notification Banner -->
                     <div id="feedbackStatusBanner" class="hidden p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 mono text-xs flex items-center justify-between">
                         <div class="flex items-center space-x-2">
                             <span>✓</span>
-                            <span>Feedback has been submitted! Opening your mail client...</span>
+                            <span>Opening your mail client... press send there to finish.</span>
                         </div>
                         <button onclick="dismissFeedbackStatus()" class="hover:opacity-80 font-bold">[ X ]</button>
                     </div>
@@ -408,7 +412,7 @@
                         <input type="email" id="fbEmail" placeholder="Your Email" class="p-3 rounded-lg theme-surface border theme-border text-xs theme-text-main focus:outline-none focus:border-studio-accent mono">
                     </div>
                     <textarea id="feedbackText" rows="3" placeholder="Share your experience with AI Student & Career OS or request features for future updates..." class="w-full p-3 rounded-lg theme-surface border theme-border text-xs theme-text-main focus:outline-none focus:border-studio-accent mono"></textarea>
-                    
+
                     <button onclick="submitFeedback()" class="mono text-xs px-5 py-3 rounded-lg bg-neutral-900 dark:bg-neutral-800 hover:bg-studio-accent hover:text-black dark:hover:bg-studio-accent dark:hover:text-black text-white transition font-medium btn-motion w-full sm:w-auto">
                         SUBMIT TRANSMISSION →
                     </button>
@@ -419,17 +423,19 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="border-t theme-border py-8 px-4 sm:px-6 mt-10">
+    <footer class="py-8 px-4 sm:px-6">
         <div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 mono text-xs theme-text-muted text-center sm:text-left">
             <div class="flex items-center space-x-2 font-semibold theme-text-main tracking-wider">
                 <span>CHECK ME OUT</span>
             </div>
             <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
-                <a href="https://discord.com/users/1438788042017214547" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium text-studio-accent">Discord [@subsnotcool]</a>
+                <a href="mailto:dataforge.support@gmail.com" class="hover-underline hover:text-studio-accent transition font-medium text-studio-accent">Email</a>
                 <span class="theme-text-muted hidden sm:inline">/</span>
-                <a href="https://www.threads.com/@bottlesonbottles7.9042" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Threads</a>
+                <a href="https://discord.com/users/1438788042017214547" target="_blank" rel="noopener" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Discord [@subsnotcool]</a>
                 <span class="theme-text-muted hidden sm:inline">/</span>
-                <a href="https://github.com/subs-cantcode" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Github</a>
+                <a href="https://www.threads.com/@bottlesonbottles7.9042" target="_blank" rel="noopener" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Threads</a>
+                <span class="theme-text-muted hidden sm:inline">/</span>
+                <a href="https://github.com/subs-cantcode" target="_blank" rel="noopener" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Github</a>
             </div>
         </div>
     </footer>
@@ -521,8 +527,9 @@
             } else {
                 btnUSD.className = 'text-studio-accent font-semibold btn-motion';
                 btnINR.className = 'theme-text-muted hover:text-studio-accent btn-motion';
-                document.getElementById('priceDisplay').innerText = '$9';
-                document.getElementById('origPriceDisplay').innerText = '$7.90';
+                // Fixed: the struck-through original price must be higher than the current price
+                document.getElementById('priceDisplay').innerText = '$6';
+                document.getElementById('origPriceDisplay').innerText = '$9';
             }
         }
 
@@ -542,7 +549,7 @@
         function toggleAccordion(contentId, iconId) {
             const content = document.getElementById(contentId);
             const icon = document.getElementById(iconId);
-            
+
             if (content.classList.contains('open')) {
                 content.classList.remove('open');
                 icon.innerText = '[ + ]';
@@ -584,11 +591,12 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             const bioElement = document.getElementById("bio-text");
-            const fullText = "Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.";
-            
+            // Read the bio from the HTML so the text only lives in one place
+            const fullText = bioElement.textContent.trim();
+
             bioElement.innerHTML = '<span class="text"></span><span class="typed-cursor">&nbsp;</span>';
             const textSpan = bioElement.querySelector(".text");
-            
+
             let i = 0;
             const speed = 40;
 
