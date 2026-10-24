@@ -45,6 +45,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Flaticon UIcons CDN for Play/Pause Icons -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    
     <style>
         /* CSS Variables for explicit high-contrast light/dark mode */
         :root {
@@ -250,34 +253,33 @@
 
         <!-- ABOUT ME SECTION -->
         <section class="mb-12">
-            <h2 class="text-xs uppercase tracking-widest text-zinc-500 mb-4">ABOUT ME</h2>
-            <p id="bio-text" class="typing-bio text-zinc-300 text-sm leading-relaxed">
+            <div class="flex items-center justify-between border-b pb-2 theme-border mb-4">
+                <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">ABOUT ME</h2>
+            </div>
+            <p id="bio-text" class="typing-bio theme-text-secondary text-sm leading-relaxed">
                 Just a techie building in public. Crafting minimal AI tools, Notion systems, and digital products.
             </p>
         </section>
 
         <!-- MY FAVORITE MUSIC SECTION WITH CUSTOM IN-PAGE PLAYER -->
         <section class="mb-12">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xs uppercase tracking-widest text-zinc-500">MY FAVORITE MUSIC</h2>
-                <span class="text-[10px] text-zinc-600 uppercase tracking-wider">01 TRACK</span>
+            <div class="flex items-center justify-between border-b pb-2 theme-border mb-4">
+                <h2 class="mono text-xs theme-text-muted uppercase tracking-widest">MY FAVORITE MUSIC</h2>
+                <span class="mono text-[10px] theme-text-muted">01 TRACK</span>
             </div>
 
             <div class="p-4 sm:p-5 rounded-2xl theme-surface border theme-border card-spring space-y-4 shadow-sm">
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-3.5">
-                        <div class="w-11 h-11 rounded-xl bg-studio-accent/10 border border-studio-accent/30 flex items-center justify-center text-studio-accent text-lg">
-                            🎵
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-semibold theme-text-main">Feel It</h3>
-                            <p class="text-xs theme-text-secondary">21 Savage & Metro Boomin</p>
-                        </div>
+                    <div>
+                        <h3 class="text-sm font-semibold theme-text-main">Feel It</h3>
+                        <p class="text-xs theme-text-secondary">21 Savage & Metro Boomin</p>
                     </div>
 
-                    <!-- Custom Play/Pause Button -->
+                    <!-- Custom Play/Pause Button using Flaticon -->
                     <button id="musicPlayBtn" onclick="togglePlayMusic()" class="w-10 h-10 rounded-full bg-studio-accent hover:bg-studio-accentHover text-black font-bold flex items-center justify-center transition btn-motion shadow-md">
-                        <span id="playIcon">▶</span>
+                        <span id="playIcon" class="flex items-center justify-center text-xs">
+                            <i class="fi fi-sr-play"></i>
+                        </span>
                     </button>
                 </div>
 
@@ -344,8 +346,8 @@
                             <div class="flex flex-wrap items-center gap-2">
                                 <span class="mono text-xs theme-text-muted">01</span>
                                 <h3 class="text-base font-semibold theme-text-main group-hover:text-studio-accent transition-colors">AI Student & Career OS</h3>
-                                <!-- Badge -->
-                                <span class="mono text-[10px] px-2.5 py-0.5 rounded-full bg-studio-accent/10 text-studio-accent border border-studio-accent/30 font-medium">Recommended</span>
+                                <!-- Badge Updated -->
+                                <span class="mono text-[10px] px-2.5 py-0.5 rounded-full bg-studio-accent/10 text-studio-accent border border-studio-accent/30 font-medium">(try out for first timers!)</span>
                             </div>
                             <p class="text-xs theme-text-secondary max-w-md pt-1 leading-relaxed">
                                 The ultimate Notion workspace. Features an Academic Course Tracker, Job Application Pipeline, and pre-engineered AI Prompt Vault for university and career prep.
@@ -425,7 +427,7 @@
             <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
                 <a href="https://discord.com/users/1438788042017214547" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium text-studio-accent">Discord [@subsnotcool]</a>
                 <span class="theme-text-muted hidden sm:inline">/</span>
-                <a href="https://www.threads.com/@bottlesonbottles1942" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Threads</a>
+                <a href="https://www.threads.com/@bottlesonbottles7.9042" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Threads</a>
                 <span class="theme-text-muted hidden sm:inline">/</span>
                 <a href="https://github.com/subs-cantcode" target="_blank" class="hover-underline hover:text-studio-accent transition font-medium theme-text-main">Github</a>
             </div>
@@ -445,7 +447,7 @@
             player = new YT.Player('yt-audio-player', {
                 height: '0',
                 width: '0',
-                videoId: '_eXEO7bzo4w',
+                videoId: '0nm-k-KJIIc',
                 playerVars: {
                     'playsinline': 1,
                     'controls': 0
@@ -465,13 +467,14 @@
         }
 
         function onPlayerStateChange(event) {
+            const playIcon = document.getElementById('playIcon');
             if (event.data == YT.PlayerState.PLAYING) {
                 isPlaying = true;
-                document.getElementById('playIcon').innerText = '❚❚';
+                playIcon.innerHTML = '<i class="fi fi-sr-pause"></i>';
                 updateInterval = setInterval(updateMusicProgress, 500);
             } else {
                 isPlaying = false;
-                document.getElementById('playIcon').innerText = '▶';
+                playIcon.innerHTML = '<i class="fi fi-sr-play"></i>';
                 clearInterval(updateInterval);
             }
         }
@@ -504,7 +507,6 @@
         }
 
         let currentCurrency = 'INR';
-        const TOPMATE_PRODUCT_URL = "https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa";
 
         function setCurrency(type) {
             currentCurrency = type;
@@ -520,7 +522,7 @@
                 btnUSD.className = 'text-studio-accent font-semibold btn-motion';
                 btnINR.className = 'theme-text-muted hover:text-studio-accent btn-motion';
                 document.getElementById('priceDisplay').innerText = '$9';
-                document.getElementById('origPriceDisplay').innerText = '$19';
+                document.getElementById('origPriceDisplay').innerText = '$7.90';
             }
         }
 
