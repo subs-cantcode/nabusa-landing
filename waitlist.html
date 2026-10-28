@@ -1,0 +1,1230 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="dark light" />
+    <title>DataForge AI — Paid plans waitlist</title>
+
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "-apple-system", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+            colors: {
+              studio: {
+                accent: "#f5a623",
+                accentHover: "#d98e11",
+                accentDeep: "#b87a0e",
+                accentGlow: "rgba(245, 166, 35, 0.12)",
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        box-sizing: border-box;
+        --bg-page: #f8f9fa;
+        --bg-surface: #ffffff;
+        --bg-input: #f1f3f5;
+        --bg-header: rgba(248, 249, 250, 0.9);
+        --border-main: #e2e8f0;
+        --text-main: #0f172a;
+        --text-secondary: #334155;
+        --text-muted: #64748b;
+        --placeholder: #94a3b8;
+        --grid-color: rgba(0, 0, 0, 0.04);
+      }
+
+      html.dark {
+        --bg-page: #0a0a0c;
+        --bg-surface: #121215;
+        --bg-input: #1a1a1e;
+        --bg-header: rgba(10, 10, 12, 0.9);
+        --border-main: #27272a;
+        --text-main: #f3f4f6;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --placeholder: #64748b;
+        --grid-color: rgba(255, 255, 255, 0.03);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+      html {
+        scroll-padding-top: calc(52px + env(safe-area-inset-top, 0px));
+        background: var(--bg-page);
+      }
+      body {
+        background: var(--bg-page);
+        color: var(--text-main);
+        font-family:
+          "Inter",
+          -apple-system,
+          sans-serif;
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+        overflow-x: hidden;
+      }
+
+      :focus-visible {
+        outline: 2px solid #f5a623;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .bg-grid-pattern {
+        background-size: 28px 28px;
+        background-image:
+          linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+          linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+      }
+
+      .card-spring {
+        transition:
+          transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25),
+          border-color 0.25s ease,
+          background-color 0.3s;
+      }
+      @media (hover: hover) {
+        .card-spring:hover {
+          transform: translateY(-2px) scale(1.003);
+          border-color: #f5a623 !important;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card-spring,
+        .btn-motion {
+          transition: none !important;
+        }
+        .card-spring:hover {
+          transform: none;
+        }
+      }
+
+      .btn-motion {
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        touch-action: manipulation;
+      }
+      .btn-motion:active {
+        transform: scale(0.96);
+      }
+      .btn-motion:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .hover-underline {
+        position: relative;
+        text-decoration: none;
+      }
+      .hover-underline::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background: #f5a623;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+      }
+      .hover-underline:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+
+      .tier-chip[aria-pressed="true"] {
+        background: rgba(245, 166, 35, 0.12);
+        border-color: #f5a623;
+      }
+      .tier-chip[aria-pressed="true"] .tier-name {
+        color: #f5a623;
+      }
+
+      .typed-cursor {
+        display: inline-block;
+        width: 7px;
+        height: 12px;
+        background: #f5a623;
+        margin-left: 4px;
+        vertical-align: middle;
+        animation: blink 1s infinite;
+      }
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .typed-cursor {
+          animation: none;
+        }
+      }
+
+      .accordion {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .accordion.open {
+        grid-template-rows: 1fr;
+      }
+      .accordion-inner {
+        overflow: hidden;
+      }
+
+      .cur-btn[aria-pressed="true"] {
+        color: #f5a623;
+        font-weight: 600;
+      }
+
+      .selection-label {
+        display: none;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+      }
+      .selection-label.visible {
+        display: block;
+      }
+
+      .ripple-dot {
+        animation: ripple 2s infinite cubic-bezier(0, 0.2, 0.8, 1);
+      }
+      @keyframes ripple {
+        0% {
+          box-shadow: 0 0 0 0 rgba(245, 166, 35, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 6px rgba(245, 166, 35, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(245, 166, 35, 0);
+        }
+      }
+      #ascii-wrapper {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-grid-pattern flex flex-col antialiased">
+    <header
+      class="sticky z-40 h-[52px] border-b border-[var(--border-main)] bg-[var(--bg-header)] backdrop-blur px-4 sm:px-6 flex items-center justify-end transition-colors"
+      style="top: 0; padding-top: env(safe-area-inset-top, 0px)"
+    >
+      <button
+        type="button"
+        id="themeToggle"
+        aria-label="Toggle theme"
+        class="text-[var(--text-secondary)] hover:text-studio-accent transition-colors flex items-center justify-center w-8 h-8 rounded-md hover:bg-[var(--bg-surface)]"
+      >
+        <i class="fi fi-sr-moon text-sm" id="themeIcon"></i>
+      </button>
+    </header>
+
+    <main
+      class="flex-1 w-full max-w-xl mx-auto px-4 sm:px-6 py-8 sm:py-16 flex flex-col items-center"
+    >
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-studio-accentGlow border border-studio-accent/40 mono text-[10px] sm:text-[11px] text-studio-accent uppercase tracking-wider mb-6 sm:mb-8 text-center"
+      >
+        <span
+          class="w-2 h-2 rounded-full bg-studio-accent ripple-dot shrink-0"
+          aria-hidden="true"
+        ></span>
+        Free tier is live · Paid plans soon
+      </div>
+
+      <h1
+        class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-center leading-tight mb-2 text-[var(--text-main)]"
+      >
+        Pro and Plus are on the way.
+      </h1>
+
+      <div
+        id="ascii-wrapper"
+        class="hidden md:flex w-full max-w-[300px] h-[130px] justify-center items-center my-2 cursor-crosshair"
+      >
+        <canvas id="ascii-logo"></canvas>
+      </div>
+
+      <p
+        id="subLine"
+        class="mono text-xs sm:text-sm text-[var(--text-secondary)] text-center leading-relaxed mb-2 max-w-[95%] sm:max-w-md min-h-[6.5rem] sm:min-h-[4.5rem]"
+      >
+        <span aria-hidden="true"
+          ><span id="typedSub"></span
+          ><span id="subCursor" class="typed-cursor"></span
+        ></span>
+      </p>
+
+      <p
+        class="mono text-[11px] sm:text-xs text-emerald-500 font-medium mb-8"
+        id="lobbyCountLabel"
+      >
+        in the lobby now: <span id="lobbyCount">0</span
+        ><span id="lobbyCursor" class="typed-cursor hidden"></span>
+      </p>
+
+      <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-10 w-full"
+      >
+        <a
+          href="https://dataforge-murex.vercel.app/workspace"
+          class="btn-motion mono text-xs text-[var(--text-secondary)] hover:text-studio-accent hover-underline transition-colors flex items-center gap-1.5 group min-h-[44px] sm:min-h-[auto]"
+        >
+          go as anonymous
+          <span
+            class="group-hover:translate-x-1 transition-transform"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+        <span
+          class="text-[var(--text-muted)] mono text-xs lowercase"
+          aria-hidden="true"
+          >or</span
+        >
+        <a
+          href="https://dataforge-murex.vercel.app/auth?mode=sign-up&from=landing"
+          class="btn-motion mono text-xs text-[var(--text-secondary)] hover:text-studio-accent hover-underline transition-colors flex items-center gap-1.5 group min-h-[44px] sm:min-h-[auto]"
+        >
+          go as free tier
+          <span
+            class="group-hover:translate-x-1 transition-transform"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+      </div>
+
+      <div
+        class="w-full flex items-center gap-3 mb-8 sm:mb-10"
+        aria-hidden="true"
+      >
+        <div class="flex-1 h-px bg-[var(--border-main)]"></div>
+        <span
+          class="mono text-[10px] text-[var(--text-muted)] uppercase tracking-widest text-center"
+          >or get notified</span
+        >
+        <div class="flex-1 h-px bg-[var(--border-main)]"></div>
+      </div>
+
+      <div
+        class="w-full bg-[var(--bg-surface)] border border-[var(--border-main)] rounded-xl p-4 sm:p-7 card-spring transition-colors"
+      >
+        <form id="waitlistForm" novalidate class="space-y-5">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span
+                class="mono text-[11px] sm:text-xs text-[var(--text-secondary)] uppercase tracking-wider"
+                >Notify me about</span
+              >
+              <div class="mono text-[11px] sm:text-xs flex items-center gap-2">
+                <button
+                  type="button"
+                  id="btnINR"
+                  class="cur-btn btn-motion min-h-[44px] sm:min-h-[32px] px-1 text-[var(--text-secondary)] hover:text-studio-accent flex items-center justify-center"
+                  aria-pressed="true"
+                  onclick="setCurrency('INR')"
+                >
+                  ₹ INR
+                </button>
+                <span class="text-[var(--text-muted)]" aria-hidden="true"
+                  >/</span
+                >
+                <button
+                  type="button"
+                  id="btnUSD"
+                  class="cur-btn btn-motion min-h-[44px] sm:min-h-[32px] px-1 text-[var(--text-secondary)] hover:text-studio-accent flex items-center justify-center"
+                  aria-pressed="false"
+                  onclick="setCurrency('USD')"
+                >
+                  $ USD
+                </button>
+              </div>
+            </div>
+
+            <p id="selectionLabel" class="selection-label" aria-live="polite">
+              Your selection
+            </p>
+
+            <div
+              class="grid grid-cols-2 gap-2 sm:gap-2.5"
+              role="group"
+              aria-label="Plan interest"
+            >
+              <button
+                type="button"
+                aria-pressed="true"
+                onclick="pickTier(this, 'Pro')"
+                data-tier-name="pro"
+                class="tier-chip btn-motion flex flex-col justify-between text-left min-h-[76px] sm:min-h-[64px] p-2.5 sm:p-3 rounded-md border border-[var(--border-main)] bg-[var(--bg-page)] transition-colors"
+              >
+                <div>
+                  <span
+                    class="tier-name mono text-sm font-medium block text-[var(--text-main)]"
+                    >Pro</span
+                  >
+                  <span
+                    class="mono text-[10px] sm:text-[11px] text-[var(--text-secondary)] block leading-tight mt-0.5"
+                    >35 tokens/day · change reports</span
+                  >
+                </div>
+                <span
+                  class="price mono text-[10px] sm:text-[11px] text-studio-accent block mt-1"
+                  data-tier="Pro"
+                  >₹1,249 / mo</span
+                >
+              </button>
+              <button
+                type="button"
+                aria-pressed="false"
+                onclick="pickTier(this, 'Plus')"
+                data-tier-name="plus"
+                class="tier-chip btn-motion flex flex-col justify-between text-left min-h-[76px] sm:min-h-[64px] p-2.5 sm:p-3 rounded-md border border-[var(--border-main)] bg-[var(--bg-page)] transition-colors"
+              >
+                <div>
+                  <span
+                    class="tier-name mono text-sm font-medium block text-[var(--text-main)]"
+                    >Plus</span
+                  >
+                  <span
+                    class="mono text-[10px] sm:text-[11px] text-[var(--text-secondary)] block leading-tight mt-0.5"
+                    >60 tokens/day · no limits UI</span
+                  >
+                </div>
+                <span
+                  class="price mono text-[10px] sm:text-[11px] text-studio-accent block mt-1"
+                  data-tier="Plus"
+                  >₹4,099 / mo</span
+                >
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="userEmail"
+              class="mono text-[11px] sm:text-xs text-[var(--text-secondary)] uppercase tracking-wider block mb-2"
+              >Email</label
+            >
+            <div class="flex flex-col sm:flex-row gap-2.5">
+              <input
+                type="email"
+                id="userEmail"
+                name="email"
+                required
+                autocomplete="email"
+                inputmode="email"
+                placeholder="analyst@company.com"
+                class="flex-1 min-h-[48px] bg-[var(--bg-input)] border border-[var(--border-main)] rounded-md px-3.5 text-base sm:text-sm mono text-[var(--text-main)] placeholder:text-[var(--placeholder)] transition-colors"
+              />
+              <input
+                type="text"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+                style="
+                  position: absolute;
+                  left: -9999px;
+                  opacity: 0;
+                  height: 0;
+                  width: 0;
+                "
+              />
+              <button
+                type="submit"
+                id="waitlistSubmit"
+                class="btn-motion min-h-[48px] bg-[var(--bg-input)] border border-studio-accent text-studio-accent hover:bg-studio-accentGlow font-semibold text-sm px-5 rounded-md whitespace-nowrap transition-colors w-full sm:w-auto"
+              >
+                Notify me →
+              </button>
+            </div>
+            <p
+              id="wlError"
+              class="hidden mt-2 mono text-[11px] text-red-500"
+              role="alert"
+            ></p>
+          </div>
+          <p
+            class="mono text-[10px] sm:text-[11px] text-[var(--text-muted)] leading-relaxed"
+          >
+            One email when paid plans open. No spam, no list-selling.
+          </p>
+        </form>
+
+        <div
+          id="doneState"
+          class="hidden text-center space-y-3 py-4"
+          role="status"
+        >
+          <div
+            class="w-12 h-12 rounded-full bg-studio-accentGlow border border-studio-accent text-studio-accent flex items-center justify-center mx-auto text-xl"
+            aria-hidden="true"
+          >
+            ✓
+          </div>
+          <h3
+            id="doneHeading"
+            tabindex="-1"
+            class="text-lg sm:text-xl font-medium outline-none text-[var(--text-main)]"
+          >
+            You're on the list.
+          </h3>
+          <p
+            id="doneText"
+            class="text-[11px] sm:text-xs text-[var(--text-secondary)] leading-relaxed"
+          ></p>
+          <a
+            href="https://dataforge-murex.vercel.app/workspace"
+            class="mono text-xs text-studio-accent hover-underline inline-block min-h-[44px] pt-2"
+            >Try the free tier while you wait →</a
+          >
+        </div>
+      </div>
+
+      <section class="w-full mt-10">
+        <button
+          type="button"
+          id="fbToggle"
+          aria-expanded="false"
+          aria-controls="fbPanel"
+          onclick="toggleFeedback()"
+          class="w-full min-h-[48px] flex items-center justify-between gap-4 text-left group"
+        >
+          <span>
+            <span
+              class="mono text-[11px] sm:text-xs text-[var(--text-secondary)] uppercase tracking-widest group-hover:text-studio-accent transition-colors block"
+              >Feedback & feature requests</span
+            >
+            <span class="text-[11px] sm:text-xs text-[var(--text-muted)]"
+              >Tried the free tier? Tell me how it felt and what to
+              improve.</span
+            >
+          </span>
+          <span
+            id="fbIcon"
+            class="mono text-sm font-bold text-[var(--text-secondary)] group-hover:text-studio-accent shrink-0"
+            aria-hidden="true"
+            >[ + ]</span
+          >
+        </button>
+
+        <div id="fbPanel" class="accordion" inert>
+          <div class="accordion-inner">
+            <div class="pt-3 space-y-2.5">
+              <p
+                id="fbStatus"
+                class="hidden p-3 rounded-lg mono text-xs"
+                role="status"
+                aria-live="polite"
+              ></p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label for="fbName" class="sr-only"
+                    >Your name or handle</label
+                  >
+                  <input
+                    type="text"
+                    id="fbName"
+                    placeholder="Your name or handle"
+                    autocomplete="name"
+                    class="w-full min-h-[44px] p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-main)] text-base sm:text-xs mono text-[var(--text-main)] placeholder:text-[var(--placeholder)]"
+                  />
+                </div>
+                <div>
+                  <label for="fbEmail" class="sr-only">Your email</label>
+                  <input
+                    type="email"
+                    id="fbEmail"
+                    placeholder="Your email (optional)"
+                    autocomplete="email"
+                    class="w-full min-h-[44px] p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-main)] text-base sm:text-xs mono text-[var(--text-main)] placeholder:text-[var(--placeholder)]"
+                  />
+                </div>
+              </div>
+              <label for="fbText" class="sr-only">Your feedback</label>
+              <textarea
+                id="fbText"
+                rows="3"
+                placeholder="What made it feel reliable? What's missing?"
+                class="w-full p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-main)] text-base sm:text-xs mono text-[var(--text-main)] placeholder:text-[var(--placeholder)]"
+              ></textarea>
+              <button
+                type="button"
+                id="fbSubmit"
+                onclick="submitFeedback()"
+                class="btn-motion mono text-xs min-h-[44px] px-5 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-main)] hover:bg-studio-accent hover:text-[#0a0a0c] hover:border-studio-accent font-medium w-full sm:w-auto text-[var(--text-main)] transition-colors"
+              >
+                SEND FEEDBACK →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const CONFIG = {
+        WAITLIST_ENDPOINT: "https://formspree.io/f/mgaaojdn",
+        FEEDBACK_ENDPOINT: "https://formspree.io/f/xdeearbo",
+        STORAGE_KEY: "df_waitlist_email_v4",
+        THEME_KEY: "df_theme",
+        COUNT_KEY: "df_mock_lobby_count_v4",
+      };
+
+      const TIER_PRICES = {
+        INR: { Pro: "₹1,249 / mo", Plus: "₹4,099 / mo" },
+        USD: { Pro: "$15 / mo", Plus: "$49 / mo" },
+      };
+
+      const SUB =
+        "Free already gives you 15 transformations a day. Join the list and we\u2019ll email you once, when paid plans open.";
+
+      const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+      const COMMON_TYPOS = {
+        "gamil.com": "gmail.com",
+        "gmial.com": "gmail.com",
+        "gmal.com": "gmail.com",
+        "gmai.com": "gmail.com",
+        "gmaill.com": "gmail.com",
+        gmailcom: "gmail.com",
+        "jmail.com": "gmail.com",
+        "g-mail.com": "gmail.com",
+        "gmail..com": "gmail.com",
+        "yaho.com": "yahoo.com",
+        "yahooo.com": "yahoo.com",
+        "yhoo.com": "yahoo.com",
+        "yhaoo.com": "yahoo.com",
+        "hotmai.com": "hotmail.com",
+        "hotmal.com": "hotmail.com",
+        "hotmil.com": "hotmail.com",
+        "hotmial.com": "hotmail.com",
+        "outlok.com": "outlook.com",
+        "outlookk.com": "outlook.com",
+        "outllok.com": "outlook.com",
+        "otlook.com": "outlook.com",
+        "iclou.com": "icloud.com",
+        "iclod.com": "icloud.com",
+        "iclound.com": "icloud.com",
+        "protonmial.com": "protonmail.com",
+        "protonmai.com": "protonmail.com",
+        "protn.me": "proton.me",
+        "proton.m": "proton.me",
+        "fastmial.com": "fastmail.com",
+        "fastmal.com": "fastmail.com",
+        "zoho.con": "zoho.com",
+        "live.con": "live.com",
+        "msn.con": "msn.com",
+      };
+
+      const BAD_TLDS = [
+        ".con",
+        ".cm",
+        ".cim",
+        ".cpm",
+        ".vom",
+        ".xom",
+        ".coml",
+        ".comm",
+        ".c",
+        ".om",
+        ".co ",
+      ];
+      const FAKE_DOMAINS = [
+        "test.com",
+        "example.com",
+        "email.com",
+        "mail.com",
+        "domain.com",
+        "yourdomain.com",
+        "test.test",
+      ];
+      const DISPOSABLE_DOMAINS = [
+        "mailinator.com",
+        "tempmail.com",
+        "10minutemail.com",
+        "guerrillamail.com",
+        "yopmail.com",
+        "sharklasers.com",
+        "dispostable.com",
+      ];
+
+      const POPULAR_DOMAINS = [
+        "gmail.com",
+        "yahoo.com",
+        "outlook.com",
+        "hotmail.com",
+        "icloud.com",
+        "me.com",
+        "mac.com",
+        "proton.me",
+        "protonmail.com",
+        "aol.com",
+        "zoho.com",
+        "yandex.com",
+        "gmx.com",
+        "mail.com",
+        "live.com",
+        "msn.com",
+        "fastmail.com",
+        "tutanota.com",
+      ];
+
+      function levenshtein(a, b) {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        const matrix = [];
+        for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+        for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+        for (let i = 1; i <= b.length; i++) {
+          for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i - 1) === a.charAt(j - 1)) {
+              matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+              matrix[i][j] = Math.min(
+                matrix[i - 1][j - 1] + 1,
+                Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1),
+              );
+            }
+          }
+        }
+        return matrix[b.length][a.length];
+      }
+
+      let tier = "Pro";
+      let currentCurrency = "INR";
+
+      function initTheme() {
+        const html = document.documentElement;
+        const icon = document.getElementById("themeIcon");
+        const saved = localStorage.getItem(CONFIG.THEME_KEY);
+        const prefersLight = window.matchMedia(
+          "(prefers-color-scheme: light)",
+        ).matches;
+        const isLight = saved ? saved === "light" : prefersLight;
+
+        if (isLight) {
+          html.classList.remove("dark");
+          html.classList.add("light");
+          icon.classList.replace("fi-sr-moon", "fi-sr-sun");
+        } else {
+          html.classList.add("dark");
+          html.classList.remove("light");
+          icon.classList.replace("fi-sr-sun", "fi-sr-moon");
+        }
+      }
+
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const html = document.documentElement;
+        const icon = document.getElementById("themeIcon");
+        const isLight = html.classList.toggle("light");
+        html.classList.toggle("dark", !isLight);
+        if (isLight) {
+          icon.classList.replace("fi-sr-moon", "fi-sr-sun");
+          localStorage.setItem(CONFIG.THEME_KEY, "light");
+        } else {
+          icon.classList.replace("fi-sr-sun", "fi-sr-moon");
+          localStorage.setItem(CONFIG.THEME_KEY, "dark");
+        }
+      });
+
+      function typeNumber(targetStr, speed = 120) {
+        const el = document.getElementById("lobbyCount");
+        const cursor = document.getElementById("lobbyCursor");
+        el.textContent = "";
+        cursor.classList.remove("hidden");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          el.textContent = targetStr;
+          cursor.classList.add("hidden");
+          return;
+        }
+        let i = 0;
+        setTimeout(() => {
+          (function type() {
+            if (i < targetStr.length) {
+              el.textContent += targetStr.charAt(i++);
+              setTimeout(type, speed);
+            } else {
+              setTimeout(() => cursor.classList.add("hidden"), 1500);
+            }
+          })();
+        }, 300);
+      }
+
+      function initLobbyCount() {
+        let currentCount = parseInt(
+          localStorage.getItem(CONFIG.COUNT_KEY) || "0",
+          10,
+        );
+        typeNumber(currentCount.toLocaleString());
+      }
+
+      function initAsciiLogo() {
+        const wrapper = document.getElementById("ascii-wrapper");
+        const canvas = document.getElementById("ascii-logo");
+        if (
+          !wrapper ||
+          !canvas ||
+          window.matchMedia("(max-width: 767px)").matches
+        )
+          return;
+
+        const ctx = canvas.getContext("2d");
+        let particles = [],
+          mouse = { x: -1000, y: -1000 },
+          width,
+          height;
+        const cols = 8,
+          rows = 8,
+          cellSize = 14,
+          squareSize = 7;
+
+        const logoMatrix = [
+          [1, 1, 1, 0, 0, 1, 1, 1],
+          [1, 1, 1, 0, 0, 1, 1, 1],
+          [1, 1, 1, 0, 0, 1, 1, 1],
+          [1, 1, 1, 0, 0, 0, 0, 0],
+          [1, 1, 1, 0, 0, 0, 0, 0],
+          [1, 1, 1, 0, 0, 1, 1, 1],
+          [1, 1, 1, 0, 0, 1, 1, 1],
+          [1, 1, 1, 0, 0, 1, 1, 1],
+        ];
+
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          width = wrapper.clientWidth;
+          height = wrapper.clientHeight;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          canvas.style.width = `${width}px`;
+          canvas.style.height = `${height}px`;
+          ctx.scale(dpr, dpr);
+          buildParticles();
+        }
+
+        function buildParticles() {
+          particles = [];
+          const startX = (width - cols * cellSize) / 2 + cellSize / 2;
+          const startY = (height - rows * cellSize) / 2 + cellSize / 2;
+          for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+              if (logoMatrix[r][c] === 1) {
+                const x = startX + c * cellSize,
+                  y = startY + r * cellSize;
+                particles.push({
+                  x,
+                  y,
+                  baseX: x,
+                  baseY: y,
+                  vx: 0,
+                  vy: 0,
+                  opacity: 0.4,
+                });
+              }
+            }
+          }
+        }
+
+        wrapper.addEventListener("mousemove", (e) => {
+          const rect = wrapper.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+        });
+        wrapper.addEventListener("mouseleave", () => {
+          mouse.x = -1000;
+          mouse.y = -1000;
+        });
+
+        function animate() {
+          ctx.clearRect(0, 0, width, height);
+          particles.forEach((p) => {
+            let dx = mouse.x - p.x,
+              dy = mouse.y - p.y,
+              dist = Math.sqrt(dx * dx + dy * dy),
+              maxDist = 35;
+            if (dist < maxDist) {
+              let force = (maxDist - dist) / maxDist;
+              p.vx -= (dx / dist) * force * 1.5;
+              p.vy -= (dy / dist) * force * 1.5;
+              p.opacity = 0.9;
+            } else {
+              p.opacity += (0.4 - p.opacity) * 0.1;
+            }
+            p.vx += (p.baseX - p.x) * 0.1;
+            p.vy += (p.baseY - p.y) * 0.1;
+            p.vx *= 0.8;
+            p.vy *= 0.8;
+            p.x += p.vx;
+            p.y += p.vy;
+            ctx.fillStyle = `rgba(245, 166, 35, ${p.opacity})`;
+            ctx.fillRect(
+              p.x - squareSize / 2,
+              p.y - squareSize / 2,
+              squareSize,
+              squareSize,
+            );
+          });
+          requestAnimationFrame(animate);
+        }
+        window.addEventListener("resize", resize);
+        resize();
+        animate();
+      }
+
+      function pickTier(btn, name) {
+        document
+          .querySelectorAll(".tier-chip")
+          .forEach((c) => c.setAttribute("aria-pressed", "false"));
+        btn.setAttribute("aria-pressed", "true");
+        tier = name;
+      }
+
+      function setCurrency(cur) {
+        currentCurrency = cur;
+        document
+          .getElementById("btnINR")
+          .setAttribute("aria-pressed", String(cur === "INR"));
+        document
+          .getElementById("btnUSD")
+          .setAttribute("aria-pressed", String(cur === "USD"));
+        document.querySelectorAll(".price").forEach((el) => {
+          el.textContent = TIER_PRICES[cur][el.dataset.tier];
+        });
+      }
+
+      function applyUpgradeParam() {
+        const want = new URLSearchParams(location.search).get("upgrade");
+        if (!want) return;
+        const target = want.toLowerCase();
+        const chip = document.querySelector(
+          `.tier-chip[data-tier-name="${target}"]`,
+        );
+        if (!chip) return;
+        pickTier(chip, chip.querySelector(".tier-name").textContent.trim());
+        document.getElementById("selectionLabel").classList.add("visible");
+        chip.focus({ preventScroll: true });
+      }
+
+      async function handleSubmit(e) {
+        e.preventDefault();
+        let email = document
+          .getElementById("userEmail")
+          .value.trim()
+          .toLowerCase();
+        const errorEl = document.getElementById("wlError");
+        const submitBtn = document.getElementById("waitlistSubmit");
+
+        console.log("Attempting submit for:", email);
+        errorEl.classList.add("hidden");
+        errorEl.textContent = "";
+        email = email.replace(/[.,]+$/, "");
+
+        if (!EMAIL_RE.test(email)) {
+          console.log("Blocked: Bad format");
+          errorEl.textContent =
+            "That doesn\u2019t look like an email \u2014 try again.";
+          errorEl.classList.remove("hidden");
+          document.getElementById("userEmail").focus();
+          return;
+        }
+
+        const domain = email.split("@")[1];
+
+        if (FAKE_DOMAINS.includes(domain)) {
+          console.log("Blocked: Fake domain");
+          errorEl.textContent =
+            "Please use a real email address (e.g. yourname@gmail.com).";
+          errorEl.classList.remove("hidden");
+          document.getElementById("userEmail").focus();
+          return;
+        }
+        if (DISPOSABLE_DOMAINS.includes(domain)) {
+          console.log("Blocked: Disposable domain");
+          errorEl.textContent =
+            "Please use a permanent email address, not a temporary one.";
+          errorEl.classList.remove("hidden");
+          document.getElementById("userEmail").focus();
+          return;
+        }
+        if (COMMON_TYPOS[domain]) {
+          console.log("Blocked: Provider typo");
+          const fixedEmail = email.split("@")[0] + "@" + COMMON_TYPOS[domain];
+          errorEl.textContent = `Did you mean ${fixedEmail}?`;
+          errorEl.classList.remove("hidden");
+          document.getElementById("userEmail").value = fixedEmail;
+          document.getElementById("userEmail").focus();
+          return;
+        }
+
+        let typoSuggestion = "";
+        for (const badTld of BAD_TLDS) {
+          if (domain.endsWith(badTld)) {
+            typoSuggestion = domain.replace(
+              new RegExp(badTld.trim() + "$"),
+              ".com",
+            );
+            break;
+          }
+        }
+        if (typoSuggestion) {
+          console.log("Blocked: TLD typo");
+          const fixedEmail = email.split("@")[0] + "@" + typoSuggestion;
+          errorEl.textContent = `Did you mean ${fixedEmail}?`;
+          errorEl.classList.remove("hidden");
+          document.getElementById("userEmail").value = fixedEmail;
+          document.getElementById("userEmail").focus();
+          return;
+        }
+
+        let closestDomain = "";
+        let minDistance = Infinity;
+        for (const popDomain of POPULAR_DOMAINS) {
+          const dist = levenshtein(domain, popDomain);
+          if (dist < minDistance) {
+            minDistance = dist;
+            closestDomain = popDomain;
+          }
+        }
+
+        const threshold = closestDomain.length > 6 ? 2 : 1;
+        if (minDistance > 0 && minDistance <= threshold) {
+          console.log(
+            `Blocked: Fuzzy match caught ${domain} -> ${closestDomain}`,
+          );
+          const fixedEmail = email.split("@")[0] + "@" + closestDomain;
+          errorEl.textContent = `Did you mean ${fixedEmail}?`;
+          errorEl.classList.remove("hidden");
+          document.getElementById("userEmail").value = fixedEmail;
+          document.getElementById("userEmail").focus();
+          return;
+        }
+
+        if (localStorage.getItem(CONFIG.STORAGE_KEY) === email) {
+          console.log("Blocked: Duplicate");
+          showDone(email, null, { already: true });
+          return;
+        }
+
+        console.log("Passed all checks. Sending to Formspree...");
+        submitBtn.disabled = true;
+        submitBtn.setAttribute("aria-busy", "true");
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = "Sending\u2026";
+
+        try {
+          const res = await fetch(CONFIG.WAITLIST_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              tier,
+              currency: currentCurrency,
+              type: "waitlist",
+              _subject: `DataForge waitlist \u2014 ${tier}`,
+            }),
+          });
+
+          console.log("Formspree returned status:", res.status);
+
+          if (!res.ok) {
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP ${res.status}`);
+          }
+
+          localStorage.setItem(CONFIG.STORAGE_KEY, email);
+          let currentCount = parseInt(
+            localStorage.getItem(CONFIG.COUNT_KEY) || "0",
+            10,
+          );
+          currentCount += 1;
+          localStorage.setItem(CONFIG.COUNT_KEY, currentCount.toString());
+          typeNumber(currentCount.toLocaleString(), 80);
+          showDone(email, null, { already: false });
+        } catch (err) {
+          console.error("Caught Error:", err);
+          errorEl.textContent = `Failed: ${err.message}. Check console.`;
+          errorEl.classList.remove("hidden");
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute("aria-busy");
+          submitBtn.textContent = originalText;
+        }
+      }
+
+      function showDone(email, position, opts = {}) {
+        const doneText = document.getElementById("doneText");
+        if (opts.already) {
+          doneText.textContent = position
+            ? `Already in line. You\u2019re #${position}. We\u2019ll email ${email} once, when ${tier} opens.`
+            : `Already in line. We\u2019ll email ${email} once, when ${tier} opens.`;
+        } else {
+          doneText.textContent = position
+            ? `You\u2019re #${position} in line. We\u2019ll email ${email} once, when ${tier} opens.`
+            : `We\u2019ll email ${email} once, when ${tier} opens.`;
+        }
+        document.getElementById("waitlistForm").classList.add("hidden");
+        const done = document.getElementById("doneState");
+        done.classList.remove("hidden");
+        document.getElementById("doneHeading").focus();
+      }
+
+      function toggleFeedback() {
+        const panel = document.getElementById("fbPanel");
+        const open = panel.classList.toggle("open");
+        panel.inert = !open;
+        document
+          .getElementById("fbToggle")
+          .setAttribute("aria-expanded", String(open));
+        document.getElementById("fbIcon").textContent = open
+          ? "[ \u2212 ]"
+          : "[ + ]";
+      }
+
+      async function submitFeedback() {
+        const name =
+          document.getElementById("fbName").value.trim() || "Anonymous";
+        const email = document.getElementById("fbEmail").value.trim();
+        const text = document.getElementById("fbText").value.trim();
+        const status = document.getElementById("fbStatus");
+        const submitBtn = document.getElementById("fbSubmit");
+
+        if (!text) {
+          status.textContent = "Write a line first, then send.";
+          status.className =
+            "p-3 rounded-lg mono text-xs bg-red-500/10 border border-red-500/30 text-red-500";
+          status.classList.remove("hidden");
+          document.getElementById("fbText").focus();
+          return;
+        }
+        if (email && !EMAIL_RE.test(email)) {
+          status.textContent =
+            "That email doesn\u2019t look right \u2014 fix it or leave it blank.";
+          status.className =
+            "p-3 rounded-lg mono text-xs bg-red-500/10 border border-red-500/30 text-red-500";
+          status.classList.remove("hidden");
+          document.getElementById("fbEmail").focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.setAttribute("aria-busy", "true");
+        submitBtn.textContent = "SENDING\u2026";
+
+        try {
+          const res = await fetch(CONFIG.FEEDBACK_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              text,
+              tier,
+              type: "feedback",
+              _subject: `DataForge feedback from ${name}`,
+            }),
+          });
+
+          if (!res.ok) {
+            const errorData = await res.json().catch(() => ({}));
+            throw new Error(errorData.error || `HTTP ${res.status}`);
+          }
+
+          document.getElementById("fbName").value = "";
+          document.getElementById("fbEmail").value = "";
+          document.getElementById("fbText").value = "";
+          status.textContent = "\u2713 Sent. Thanks \u2014 that helps.";
+          status.className =
+            "p-3 rounded-lg mono text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-500";
+          status.classList.remove("hidden");
+        } catch (err) {
+          status.textContent = `Failed: ${err.message}. Check console.`;
+          status.className =
+            "p-3 rounded-lg mono text-xs bg-red-500/10 border border-red-500/30 text-red-500";
+          status.classList.remove("hidden");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute("aria-busy");
+          submitBtn.textContent = "SEND FEEDBACK \u2192";
+        }
+      }
+
+      (function initSubline() {
+        const line = document.getElementById("subLine"),
+          el = document.getElementById("typedSub"),
+          cursor = document.getElementById("subCursor");
+        line.setAttribute("aria-label", SUB);
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          el.textContent = SUB;
+          cursor?.remove();
+          return;
+        }
+        let i = 0;
+        (function type() {
+          if (i < SUB.length) {
+            el.textContent += SUB.charAt(i++);
+            setTimeout(type, 28);
+          }
+        })();
+      })();
+
+      document
+        .getElementById("waitlistForm")
+        .addEventListener("submit", handleSubmit);
+      initTheme();
+      initLobbyCount();
+      initAsciiLogo();
+      setCurrency("INR");
+      applyUpgradeParam();
+    </script>
+  </body>
+</html>
