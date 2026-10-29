@@ -250,9 +250,16 @@
   </head>
   <body class="min-h-screen bg-grid-pattern flex flex-col antialiased">
     <header
-      class="sticky z-40 h-[52px] border-b border-[var(--border-main)] bg-[var(--bg-header)] backdrop-blur px-4 sm:px-6 flex items-center justify-end transition-colors"
+      class="sticky z-40 h-[52px] border-b border-[var(--border-main)] bg-[var(--bg-header)] backdrop-blur px-4 sm:px-6 flex items-center justify-between transition-colors"
       style="top: 0; padding-top: env(safe-area-inset-top, 0px)"
     >
+      <a
+        href="index.html"
+        class="text-[var(--text-secondary)] hover:text-studio-accent transition-colors flex items-center justify-center w-8 h-8 rounded-md hover:bg-[var(--bg-surface)]"
+        aria-label="Back to profile"
+      >
+        <i class="fi fi-sr-arrow-left text-xs"></i>
+      </a>
       <button
         type="button"
         id="themeToggle"
@@ -279,7 +286,7 @@
       <h1
         class="text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-center leading-tight mb-2 text-[var(--text-main)]"
       >
-        Pro and Plus are on the way.
+        Pro is on the way.
       </h1>
 
       <div
@@ -391,7 +398,7 @@
             </p>
 
             <div
-              class="grid grid-cols-2 gap-2 sm:gap-2.5"
+              class="grid grid-cols-1 gap-2 sm:gap-2.5"
               role="group"
               aria-label="Plan interest"
             >
@@ -403,43 +410,22 @@
                 class="tier-chip btn-motion flex flex-col justify-between text-left min-h-[76px] sm:min-h-[64px] p-2.5 sm:p-3 rounded-md border border-[var(--border-main)] bg-[var(--bg-page)] transition-colors"
               >
                 <div>
+                  <div class="flex items-center justify-between w-full">
+                    <span
+                      class="tier-name mono text-sm font-medium block text-[var(--text-main)]"
+                      >Pro</span
+                    >
+                    <span
+                      class="price mono text-[10px] sm:text-[11px] text-studio-accent block font-semibold"
+                      data-tier="Pro"
+                      >₹999 / mo</span
+                    >
+                  </div>
                   <span
-                    class="tier-name mono text-sm font-medium block text-[var(--text-main)]"
-                    >Pro</span
-                  >
-                  <span
-                    class="mono text-[10px] sm:text-[11px] text-[var(--text-secondary)] block leading-tight mt-0.5"
-                    >35 tokens/day · change reports</span
-                  >
-                </div>
-                <span
-                  class="price mono text-[10px] sm:text-[11px] text-studio-accent block mt-1"
-                  data-tier="Pro"
-                  >₹1,249 / mo</span
-                >
-              </button>
-              <button
-                type="button"
-                aria-pressed="false"
-                onclick="pickTier(this, 'Plus')"
-                data-tier-name="plus"
-                class="tier-chip btn-motion flex flex-col justify-between text-left min-h-[76px] sm:min-h-[64px] p-2.5 sm:p-3 rounded-md border border-[var(--border-main)] bg-[var(--bg-page)] transition-colors"
-              >
-                <div>
-                  <span
-                    class="tier-name mono text-sm font-medium block text-[var(--text-main)]"
-                    >Plus</span
-                  >
-                  <span
-                    class="mono text-[10px] sm:text-[11px] text-[var(--text-secondary)] block leading-tight mt-0.5"
-                    >60 tokens/day · no limits UI</span
+                    class="mono text-[10px] sm:text-[11px] text-[var(--text-secondary)] block leading-tight mt-1"
+                    >1,000 credits/month · 100k rows</span
                   >
                 </div>
-                <span
-                  class="price mono text-[10px] sm:text-[11px] text-studio-accent block mt-1"
-                  data-tier="Plus"
-                  >₹4,099 / mo</span
-                >
               </button>
             </div>
           </div>
@@ -483,6 +469,9 @@
                 Notify me →
               </button>
             </div>
+            <p class="mt-2 mono text-[10px] text-[var(--text-muted)]">
+              What would you pay for?
+            </p>
             <p
               id="wlError"
               class="hidden mt-2 mono text-[11px] text-red-500"
@@ -617,12 +606,12 @@
       };
 
       const TIER_PRICES = {
-        INR: { Pro: "₹1,249 / mo", Plus: "₹4,099 / mo" },
-        USD: { Pro: "$15 / mo", Plus: "$49 / mo" },
+        INR: { Pro: "₹999 / mo" },
+        USD: { Pro: "$12 / mo" },
       };
 
       const SUB =
-        "Free already gives you 15 transformations a day. Join the list and we\u2019ll email you once, when paid plans open.";
+        "Get 1,000 credits/month for just $12. Join the list and we\u2019ll email you the moment Pro opens.";
 
       const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
