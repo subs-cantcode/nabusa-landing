@@ -7,7 +7,6 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <title>NABUS — Developer & AI Product Studio</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -29,23 +28,18 @@
               "fade-in": "fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards",
             },
             keyframes: {
-              fadeIn: {
-                "0%": { opacity: "0" },
-                "100%": { opacity: "1" },
-              },
+              fadeIn: { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
             },
           },
         },
       };
     </script>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Flaticon UIcons CDN -->
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
@@ -62,7 +56,6 @@
         --text-secondary: #334155;
         --text-muted: #64748b;
       }
-
       html.dark {
         --bg-page: #0a0a0c;
         --bg-surface: #121215;
@@ -73,7 +66,6 @@
         --text-secondary: #cbd5e1;
         --text-muted: #94a3b8;
       }
-
       body {
         font-family:
           "Inter",
@@ -85,11 +77,9 @@
           background-color 0.25s ease,
           color 0.25s ease;
       }
-
       .mono {
         font-family: "JetBrains Mono", monospace;
       }
-
       .theme-surface {
         background-color: var(--bg-surface);
         border-color: var(--border-main);
@@ -110,7 +100,6 @@
       .theme-border {
         border-color: var(--border-main);
       }
-
       .card-spring {
         transition:
           transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25),
@@ -123,7 +112,6 @@
           border-color: #f5a623 !important;
         }
       }
-
       .btn-motion {
         transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         touch-action: manipulation;
@@ -131,7 +119,6 @@
       .btn-motion:active {
         transform: scale(0.96);
       }
-
       .hover-underline {
         position: relative;
         text-decoration: none;
@@ -152,7 +139,6 @@
         transform: scaleX(1);
         transform-origin: bottom left;
       }
-
       .bg-grid-pattern {
         background-size: 28px 28px;
         background-image:
@@ -172,7 +158,6 @@
           linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
           linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
       }
-
       .accordion-content {
         display: grid;
         grid-template-rows: 0fr;
@@ -184,7 +169,6 @@
       .accordion-inner {
         overflow: hidden;
       }
-
       .typing-bio {
         font-family: "JetBrains Mono", monospace;
       }
@@ -197,7 +181,6 @@
         margin-left: 4px;
         vertical-align: middle;
       }
-
       @keyframes blink {
         0%,
         50% {
@@ -208,8 +191,6 @@
           opacity: 0;
         }
       }
-
-      /* Custom Terminal Cursor for Header */
       .cursor-blink {
         animation: terminal-blink 1s step-end infinite;
       }
@@ -222,8 +203,6 @@
           opacity: 0;
         }
       }
-
-      /* --- LOADER OVERLAY --- */
       .loader-overlay {
         position: fixed;
         inset: 0;
@@ -269,16 +248,17 @@
   <body
     class="min-h-screen flex flex-col justify-between selection:bg-studio-accent selection:text-black bg-grid-pattern antialiased"
   >
-    <!-- LOADING OVERLAY -->
-    <div id="loaderOverlay" class="loader-overlay">
+    <div
+      id="loaderOverlay"
+      class="loader-overlay"
+      onclick="this.classList.remove('active')"
+    >
       <div id="loaderGrid" class="loader-grid"></div>
     </div>
 
-    <!-- MAIN CONTAINER -->
     <div
       class="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-14 w-full flex-grow space-y-10 sm:space-y-12 animate-fade-in"
     >
-      <!-- HEADER -->
       <header class="flex items-center justify-between pb-2">
         <div
           class="group cursor-pointer flex items-center"
@@ -288,8 +268,6 @@
             class="mono text-2xl sm:text-3xl font-semibold tracking-tight theme-text-main group-hover:text-studio-accent transition-colors flex items-center"
           >
             <span class="text-studio-accent font-bold mr-2">&gt;</span>
-
-            <!-- Wrapper prevents layout shift while keeping text and cursor glued together -->
             <span
               class="inline-flex items-center min-w-[150px] sm:min-w-[190px]"
             >
@@ -297,14 +275,12 @@
                 id="typing-text"
                 class="inline-block whitespace-nowrap"
               ></span>
-              <!-- Cursor uses em units to scale perfectly with the text -->
               <span
                 class="inline-block w-[0.45em] h-[1.1em] bg-studio-accent ml-1.5 cursor-blink"
               ></span>
             </span>
           </div>
         </div>
-
         <div class="flex items-center space-x-3">
           <button
             onclick="toggleTheme()"
@@ -315,7 +291,6 @@
         </div>
       </header>
 
-      <!-- ABOUT ME -->
       <section>
         <div class="flex items-center justify-between mb-3 sm:mb-4">
           <h2
@@ -333,7 +308,6 @@
         </p>
       </section>
 
-      <!-- FAVORITE MUSIC -->
       <section>
         <div class="flex items-center justify-between mb-3 sm:mb-4">
           <h2
@@ -367,12 +341,10 @@
               picture-in-picture;
             "
             loading="lazy"
-          >
-          </iframe>
+          ></iframe>
         </div>
       </section>
 
-      <!-- ACTIVE ECOSYSTEM -->
       <section>
         <div class="flex items-center justify-between mb-3 sm:mb-4">
           <h2
@@ -411,7 +383,6 @@
               and AI prompt engineering.
             </p>
           </div>
-
           <div
             class="p-4 rounded-xl theme-surface-subtle border card-spring space-y-2 shadow-sm flex flex-col justify-between"
           >
@@ -437,21 +408,18 @@
                 Describe the transformation you want—your dataset becomes one.
               </p>
             </div>
-
             <div class="pt-3">
               <a
                 href="waitlist.html"
                 onclick="startDataForgeRedirect(event)"
                 class="mono text-[11px] sm:text-xs px-3.5 py-2 rounded bg-studio-accent hover:bg-studio-accentHover text-black font-semibold btn-motion shadow-sm inline-flex items-center gap-1.5"
+                >Join Waitlist →</a
               >
-                Join Waitlist →
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- DIGITAL PRODUCTS -->
       <section>
         <div class="flex items-center justify-between mb-3 sm:mb-4">
           <h2
@@ -547,15 +515,13 @@
                 href="https://topmate.io/nabusa/2368046?utm_source=public_profile&utm_campaign=nabusa"
                 target="_blank"
                 class="w-full sm:w-auto text-center mono text-sm px-5 py-3 rounded-lg bg-studio-accent hover:bg-studio-accentHover text-black font-semibold btn-motion shadow-md inline-block"
+                >GET INSTANT ACCESS →</a
               >
-                GET INSTANT ACCESS →
-              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- FEEDBACK DRAWER -->
       <section class="space-y-3">
         <div
           class="flex items-center justify-between cursor-pointer group py-2"
@@ -584,7 +550,6 @@
             >[ + ]</span
           >
         </div>
-
         <div id="feedbackContent" class="accordion-content">
           <div class="accordion-inner pt-2 space-y-3">
             <div
@@ -592,8 +557,8 @@
               class="hidden p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 mono text-xs flex items-center justify-between"
             >
               <div class="flex items-center space-x-2">
-                <span>✓</span>
-                <span
+                <span>✓</span
+                ><span
                   >Feedback has been submitted! Opening your mail
                   client...</span
                 >
@@ -636,7 +601,6 @@
       </section>
     </div>
 
-    <!-- FOOTER -->
     <footer class="py-8 px-4 sm:px-6 mt-10">
       <div
         class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 mono text-xs theme-text-muted text-center sm:text-left"
@@ -673,7 +637,6 @@
       </div>
     </footer>
 
-    <!-- SCRIPT LOGIC -->
     <script>
       let currentCurrency = "INR";
 
@@ -681,7 +644,6 @@
         currentCurrency = type;
         const btnINR = document.getElementById("btnINR");
         const btnUSD = document.getElementById("btnUSD");
-
         if (type === "INR") {
           btnINR.className = "text-studio-accent font-semibold btn-motion";
           btnUSD.className =
@@ -728,15 +690,14 @@
           document.getElementById("fbEmail").value.trim() ||
           "No email provided";
         const text = document.getElementById("feedbackText").value.trim();
-
         if (!text) {
           alert("Please type your feedback message before submitting.");
           return;
         }
 
-        const statusBanner = document.getElementById("feedbackStatusBanner");
-        statusBanner.classList.remove("hidden");
-
+        document
+          .getElementById("feedbackStatusBanner")
+          .classList.remove("hidden");
         const subject = encodeURIComponent(
           `[DataForge Product Feedback] from ${name}`,
         );
@@ -748,7 +709,6 @@
         setTimeout(() => {
           window.location.href = mailtoUrl;
         }, 400);
-
         document.getElementById("feedbackText").value = "";
         document.getElementById("fbName").value = "";
         document.getElementById("fbEmail").value = "";
@@ -765,21 +725,17 @@
         bioElement.innerHTML =
           '<span class="text"></span><span class="typed-cursor">&nbsp;</span>';
         const textSpan = bioElement.querySelector(".text");
-
         let i = 0;
-        const speed = 40;
-
         function typeWriter() {
           if (i < fullText.length) {
             textSpan.textContent += fullText.charAt(i);
             i++;
-            setTimeout(typeWriter, speed);
+            setTimeout(typeWriter, 40);
           }
         }
         setTimeout(typeWriter, 300);
       });
 
-      // --- DATAFORGE REDIRECT & LOADER LOGIC ---
       const logoMatrix = [
         [1, 1, 1, 0, 0, 1, 1, 1],
         [1, 1, 1, 0, 0, 1, 1, 1],
@@ -806,26 +762,33 @@
         }
       }
 
+      // THE FIX: Store the timeout ID so we can cancel it if they hit back
+      let redirectTimeout;
       function startDataForgeRedirect(e) {
         e.preventDefault();
         document.getElementById("loaderOverlay").classList.add("active");
-        setTimeout(() => {
+        redirectTimeout = setTimeout(() => {
           window.location.href = "waitlist.html";
         }, 1500);
       }
 
+      // THE FIX: When returning to this page, remove overlay and KILL the timer
+      window.addEventListener("pageshow", function (event) {
+        const overlay = document.getElementById("loaderOverlay");
+        if (overlay) overlay.classList.remove("active");
+        if (redirectTimeout) clearTimeout(redirectTimeout);
+      });
+
       buildLoader();
 
-      // --- HEADER TYPEWRITER LOGIC ---
       const words = ["Nabus", "Developer", "Designer"];
-      let wordIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
+      let wordIndex = 0,
+        charIndex = 0,
+        isDeleting = false;
       const typingElement = document.getElementById("typing-text");
 
       function typeHeader() {
         const currentWord = words[wordIndex];
-
         if (isDeleting) {
           typingElement.textContent = currentWord.substring(0, charIndex - 1);
           charIndex--;
@@ -833,21 +796,17 @@
           typingElement.textContent = currentWord.substring(0, charIndex + 1);
           charIndex++;
         }
-
         let typeSpeed = isDeleting ? 50 : 100;
-
         if (!isDeleting && charIndex === currentWord.length) {
-          typeSpeed = 2000; // Pause at end of word
+          typeSpeed = 2000;
           isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
           isDeleting = false;
           wordIndex = (wordIndex + 1) % words.length;
-          typeSpeed = 500; // Pause before next word
+          typeSpeed = 500;
         }
-
         setTimeout(typeHeader, typeSpeed);
       }
-
       setTimeout(typeHeader, 1000);
     </script>
   </body>
